@@ -160,20 +160,20 @@ function updateGraph() {
 }
 
 increaseSpeedButton.addEventListener('click', () => {
-    changeSpeed(10); // Increase speed by 10 km/h
+    changeSpeed(2); // Increase speed by 2 km/h
 });
 
 decreaseSpeedButton.addEventListener('click', () => {
-    changeSpeed(-10); // Decrease speed by 10 km/h
+    changeSpeed(-2); // Decrease speed by 2 km/h
 });
 
 playHornButton.addEventListener('click', playHorn);
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowUp') {
-        changeSpeed(10); // Increase speed by 10 km/h
+        changeSpeed(2); // Increase speed by 2 km/h
     } else if (event.key === 'ArrowDown') {
-        changeSpeed(-10); // Decrease speed by 10 km/h
+        changeSpeed(-2); // Decrease speed by 2 km/h
     } else if (event.key === ' ') {
         playHorn(); // Play horn when spacebar is pressed
     }
