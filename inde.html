@@ -21,16 +21,22 @@
         <div class="controls">
             <button id="decreaseSpeed">Decrease Speed</button>
             <button id="increaseSpeed">Increase Speed</button>
+            <button id="playHorn">Horn</button>
         </div>
         <div class="info">
             <p>Speed: <span id="speed">0</span> km/h</p>
             <p>Distance Traveled: <span id="distance">0</span> meters</p>
         </div>
-        <!-- Graph Canvas -->
         <div class="graph-container">
             <canvas id="speedGraph" width="600" height="300"></canvas>
         </div>
     </div>
+
+    <!-- Audio Elements -->
+    <audio id="carStartAudio" src="car-engine-start-44357.mp3"></audio>
+    <audio id="carAccelerationAudio" src="car-acceleration.mp3"></audio>
+    <audio id="carHornAudio" src="car-horn.mp3"></audio>
+
     <script src="script.js"></script>
 </body>
 </html>

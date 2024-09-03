@@ -7,12 +7,22 @@ const speedElement = document.getElementById('speed');
 const distanceElement = document.getElementById('distance');
 const increaseSpeedButton = document.getElementById('increaseSpeed');
 const decreaseSpeedButton = document.getElementById('decreaseSpeed');
+const carStartAudio = document.getElementById('carStartAudio');
+const carAccelerationAudio = document.getElementById('carAccelerationAudio');
+const carHornAudio = document.getElementById('carHornAudio');
+const playHornButton = document.getElementById('playHorn');
 const canvas = document.getElementById('speedGraph');
 const ctx = canvas.getContext('2d');
 const graphData = [];
 const graphInterval = 100; // Update graph every 100 ms
 let lastGraphTime = 0;
 let time = 0;
+let carStarted = false;
+
+// Set initial volume for each sound effect
+carStartAudio.volume = 0.8; // 80% volume
+carAccelerationAudio.volume = 0.7; // 70% volume initially
+carHornAudio.volume = 1.0; // 100% volume
 
 // Update position and speed display
 function updatePosition() {
@@ -38,8 +48,38 @@ function updatePosition() {
 
 // Change speed and update position
 function changeSpeed(amount) {
+    let previousSpeed = speed;
     speed = Math.max(0, Math.min(maxSpeed, speed + amount));
+
+    if (speed > 0 && !carStarted) {
+        // Play car start sound on the first acceleration
+        carStartAudio.play();
+        carStarted = true;
+    }
+
+    if (speed > previousSpeed) {
+        // Play car acceleration sound when increasing speed
+        carAccelerationAudio.currentTime = 0; // Restart sound
+        carAccelerationAudio.play();
+    }
+
+    // Adjust volume based on speed relative to maxSpeed
+    carAccelerationAudio.volume = speed / maxSpeed;
+
+    if (speed < previousSpeed) {
+        // Optionally, adjust sound behavior when decreasing speed
+        if (speed === 0) {
+            carAccelerationAudio.pause();
+            carAccelerationAudio.currentTime = 0; // Reset sound to the start
+        }
+    }
+
     updatePosition();
+}
+
+// Play horn sound
+function playHorn() {
+    carHornAudio.play();
 }
 
 function updateGraph() {
@@ -127,11 +167,15 @@ decreaseSpeedButton.addEventListener('click', () => {
     changeSpeed(-10); // Decrease speed by 10 km/h
 });
 
+playHornButton.addEventListener('click', playHorn);
+
 document.addEventListener('keydown', (event) => {
     if (event.key === 'ArrowUp') {
         changeSpeed(10); // Increase speed by 10 km/h
     } else if (event.key === 'ArrowDown') {
         changeSpeed(-10); // Decrease speed by 10 km/h
+    } else if (event.key === ' ') {
+        playHorn(); // Play horn when spacebar is pressed
     }
 });
 
