@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Motion Car Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Linear Motion Car Game</h1>
+        <div class="track">
+            <div id="road" class="road">
+                <div class="lane-marker"></div>
+                <div class="lane-marker"></div>
+                <div class="lane-marker"></div>
+                <div class="lane-marker"></div>
+            </div>
+            <div id="car" class="car"></div>
+        </div>
+        <div class="controls">
+            <button id="decreaseSpeed">Decrease Speed</button>
+            <button id="increaseSpeed">Increase Speed</button>
+        </div>
+        <div class="info">
+            <p>Speed: <span id="speed">0</span> km/h</p>
+            <p>Distance Traveled: <span id="distance">0</span> meters</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
